@@ -1,0 +1,133 @@
+                                   HOF Assignment
+
+1. Reverse String with Delay
+javascript
+Copy code
+function reverseStringWithDelay(input) {
+  setTimeout(() => {
+    const reversedString = input.split('').reverse().join('');
+    console.log('Reversed String:', reversedString);
+  }, 2000); // Delay of 2 seconds
+}
+
+const input = "Hello World";
+reverseStringWithDelay(input);
+
+Explanation:
+
+setTimeout is used to introduce a 2-second delay before reversing the string.
+input.split('').reverse().join('') splits the string into an array, reverses it, and joins it back to form the reversed string.
+
+2. Random Number Generator with Delay and Progress Indication
+javascript
+Copy code
+function randomNumberWithDelay(delay) {
+  let timeRemaining = delay;
+
+  const intervalId = setInterval(() => {
+    if (timeRemaining > 0) {
+      console.log(`${timeRemaining} seconds remaining...`);
+      timeRemaining--;
+    } else {
+      clearInterval(intervalId);
+      const randomNumber = Math.floor(Math.random() * 100); // Random number between 0 and 99
+      console.log('Generated Random Number:', randomNumber);
+    }
+  }, 1000);
+}
+
+const delay = 3; // 3 seconds delay
+randomNumberWithDelay(delay);
+
+Explanation:
+
+The setInterval function is used to display the countdown every second.
+After the countdown ends (3 seconds), the interval is cleared using clearInterval, and a random number is generated and printed.
+
+3. Store's Inventory: Convert USD Prices to INR
+javascript
+Copy code
+const storeInventory = {
+  "Apple": 1.5,
+  "Banana": 0.5,
+  "Orange": 1.2,
+  "Grapes": 2.0
+};
+
+const exchangeRate = 80; // 1 USD = 80 INR
+
+const inventoryInRupees = Object.fromEntries(
+  Object.entries(storeInventory).map(([item, priceInUSD]) => [item, priceInUSD * exchangeRate])
+);
+
+console.log('Inventory in INR:', inventoryInRupees);
+
+Explanation:
+
+Object.entries() converts the object into an array of key-value pairs.
+map() is used to multiply the prices by the exchange rate and return the new object using Object.fromEntries().
+
+4. Filtering and Capitalizing Books Published After 2010
+javascript
+Copy code
+const books = [
+  { title: 'Book One', author: 'john doe', year: 2008 },
+  { title: 'Book Two', author: 'jane smith', year: 2015 },
+  { title: 'Book Three', author: 'alex jones', year: 2011 },
+  { title: 'Book Four', author: 'emily davis', year: 2009 }
+];
+
+const booksAfter2010 = books
+  .filter(book => book.year > 2010)
+  .map(book => ({
+    ...book,
+    author: book.author.split(' ')
+      .map(name => name.charAt(0).toUpperCase() + name.slice(1))
+      .join(' ')
+  }));
+
+console.log('Books Published After 2010:', booksAfter2010);
+
+Explanation:
+
+filter() is used to keep only the books published after 2010.
+map() is used to capitalize the author's name.
+
+5. URL Validation
+javascript
+Copy code
+function validateURL(url) {
+  const urlPattern = /^(http:\/\/|https:\/\/)[\w\-]+(\.[\w\-]+)+/;
+  
+  if (urlPattern.test(url)) {
+    console.log('Valid URL');
+  } else {
+    console.log('Invalid URL');
+  }
+}
+
+validateURL('https://example.com');
+validateURL('http://invalid-url');
+
+Explanation:
+
+The regex pattern ^(http:\/\/|https:\/\/)[\w\-]+(\.[\w\-]+)+ ensures that the URL starts with http:// or https:// and is followed by valid domain characters.
+6. LinkedIn Profile URL Validator
+javascript
+Copy code
+function validateLinkedInProfile(url) {
+  const linkedInPattern = /^https:\/\/www\.linkedin\.com\/in\/[a-zA-Z0-9_-]{5,30}$/;
+  
+  if (linkedInPattern.test(url)) {
+    console.log('Valid LinkedIn Profile URL');
+  } else {
+    console.log('Invalid LinkedIn Profile URL');
+  }
+}
+
+validateLinkedInProfile('https://www.linkedin.com/in/john-doe-12345');
+validateLinkedInProfile('https://www.linkedin.com/in/invalid-url');
+
+Explanation:
+
+The regex pattern ^https:\/\/www\.linkedin\.com\/in\/[a-zA-Z0-9_-]{5,30}$ ensures the URL starts correctly, only allows valid characters (letters, digits, hyphens, underscores), and limits the profile ID length between 5 and 30 characters.
